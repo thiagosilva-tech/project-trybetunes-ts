@@ -14,10 +14,9 @@ function Album() {
   useEffect(() => {
     async function fetchMusics() {
       setLoading(true);
-      const response = await getMusics(id);
-      setAlbum(response[0]);
-      console.log(response);
-      setListMusics(response);
+      const [albumResponse, ...musicResponses] = await getMusics(id);
+      setAlbum(albumResponse);
+      setListMusics(musicResponses);
       setLoading(false);
     }
     fetchMusics();
@@ -32,7 +31,7 @@ function Album() {
             <h2 data-testid="album-name">{album.collectionName}</h2>
             <h3 data-testid="artist-name">{album.artistName}</h3>
             <div>
-              {listMusics.slice(1).map((music) => (
+              {listMusics?.map((music) => (
                 <MusicCard
                   key={ music.trackId }
                   trackName={ music.trackName }
