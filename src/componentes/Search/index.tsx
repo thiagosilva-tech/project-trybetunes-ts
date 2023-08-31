@@ -2,13 +2,14 @@ import { useState } from 'react';
 import Loading from '../Loading';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import { AlbumType } from '../../types';
-import Album from '../Album';
+import PrevAlbum from '../PrevAlbum';
 
 function Search() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<AlbumType[]>([]);
   const [artistName, setArtistName] = useState('');
+  const [showResultEmpty, setShowResultEmpty] = useState(false);
 
   const handleSearch = async () => {
     if (search.length < 2) {
@@ -22,9 +23,11 @@ function Search() {
     if (searchResult && searchResult.length > 0) {
       setResults(searchResult);
       setArtistName(search);
+      setShowResultEmpty(false);
     } else {
       setResults([]);
       setArtistName('');
+      setShowResultEmpty(true);
     }
     setSearch('');
   };
@@ -59,10 +62,13 @@ function Search() {
               {artistName}
             </p>
             {results
-              .map((result) => <Album key={ result.artistId } albumInfo={ result } />)}
+              .map((result) => (<PrevAlbum
+                key={ result.artistId }
+                albumInfo={ result }
+              />))}
           </div>
         )}
-        {results.length === 0 && <p>Nenhum álbum foi encontrado</p>}
+        {showResultEmpty && <p>Nenhum álbum foi encontrado</p>}
       </form>
     </div>
   );

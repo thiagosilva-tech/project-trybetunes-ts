@@ -1,22 +1,47 @@
-import { Link } from 'react-router-dom';
-import { AlbumType } from '../../types';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import getMusics from '../../services/musicsAPI';
+import Loading from '../Loading';
+import { AlbumType, SongType } from '../../types';
+import MusicCard from '../MusicCard';
 
-type AlbumTypeProp = {
-  albumInfo: AlbumType
-};
+function Album() {
+  const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [album, setAlbum] = useState<AlbumType>();
+  const [listMusics, setListMusics] = useState<SongType[]>();
 
-function Album({ albumInfo }: AlbumTypeProp) {
+  useEffect(() => {
+    async function fetchMusics() {
+      setLoading(true);
+      const response = await getMusics(id);
+      setAlbum(response[0]);
+      console.log(response);
+      setListMusics(response);
+      setLoading(false);
+    }
+    fetchMusics();
+  }, [id]);
+
   return (
     <div>
-      <img src={ albumInfo.artworkUrl100 } alt={ albumInfo.collectionName } />
-      <Link
-        data-testid={ `link-to-album-${albumInfo.collectionId}` }
-        to={ `/album/${albumInfo.collectionId}` }
-      >
-        {albumInfo.collectionName}
-
-      </Link>
-      <p>{albumInfo.artistName}</p>
+      {loading
+        ? <Loading />
+        : (album && (
+          <div>
+            <h2 data-testid="album-name">{album.collectionName}</h2>
+            <h3 data-testid="artist-name">{album.artistName}</h3>
+            <div>
+              {listMusics.slice(1).map((music) => (
+                <MusicCard
+                  key={ music.trackId }
+                  trackName={ music.trackName }
+                  previewUrl={ music.previewUrl }
+                />
+              ))}
+            </div>
+          </div>
+        ))}
     </div>
   );
 }
