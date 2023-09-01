@@ -6,7 +6,7 @@ import { AlbumType, SongType } from '../../types';
 import MusicCard from '../MusicCard';
 
 function Album() {
-  const { id } = useParams();
+  const { id = '' } = useParams();
   const [loading, setLoading] = useState(false);
   const [album, setAlbum] = useState<AlbumType>();
   const [listMusics, setListMusics] = useState<SongType[]>();
