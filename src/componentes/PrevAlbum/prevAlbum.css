@@ -1,0 +1,20 @@
+.container-prevAlbumInfo {
+  border: 2px solid #03342d;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  max-width: 200px;
+  min-width: 200px;
+  padding: 15px;
+}
+
+.link-prevAlbum {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.p-artistName {
+  text-align: center;
+}

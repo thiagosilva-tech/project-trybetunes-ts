@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/userAPI';
 import Loading from '../Loading';
+import './login.css';
 
 function Login() {
   const [login, setLogin] = useState('');
@@ -32,9 +33,11 @@ function Login() {
   }
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <label htmlFor="login">Insira seu nome</label>
+    <form className="form-login" onSubmit={ handleSubmit }>
+      <h1 className="title">Trybe Tunes</h1>
+      <label className="title-login" htmlFor="login">Insira seu nome</label>
       <input
+        className="input-login"
         id="login"
         type="text"
         name="login"
@@ -43,6 +46,7 @@ function Login() {
         data-testid="login-name-input"
       />
       <button
+        className="btn-login"
         disabled={ disabled }
         data-testid="login-submit-button"
       >

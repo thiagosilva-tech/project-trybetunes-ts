@@ -20,12 +20,33 @@ function Header() {
   }, []);
 
   return (
-    <header data-testid="header-component">
-      <div>
-        <NavLink to="/search" data-testid="link-to-search">Search</NavLink>
-        <NavLink to="/favorites" data-testid="link-to-favorites">Favorites</NavLink>
-        <NavLink to="/profile" data-testid="link-to-profile">Profile</NavLink>
+    <header data-testid="header-component" className="header">
+      <div className="container-login">
+        <h1 className="tituto">Trybe Tunes</h1>
         {loading ? <Loading /> : (user && <UserProfile userInfo={ user } />)}
+      </div>
+      <div className="container-navlink">
+        <NavLink
+          to="/search"
+          data-testid="link-to-search"
+          className="navlink"
+        >
+          Search
+        </NavLink>
+        <NavLink
+          to="/favorites"
+          data-testid="link-to-favorites"
+          className="navlink"
+        >
+          Favorites
+        </NavLink>
+        <NavLink
+          to="/profile"
+          data-testid="link-to-profile"
+          className="navlink"
+        >
+          Profile
+        </NavLink>
       </div>
     </header>
   );

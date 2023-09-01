@@ -3,6 +3,7 @@ import Loading from '../Loading';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import { AlbumType } from '../../types';
 import PrevAlbum from '../PrevAlbum';
+import './search.css';
 
 function Search() {
   const [search, setSearch] = useState('');
@@ -37,9 +38,10 @@ function Search() {
   }
 
   return (
-    <div>
-      <form>
+    <div className="container-search">
+      <form className="form-search">
         <input
+          className="input-search"
           type="text"
           name="search"
           value={ search }
@@ -47,6 +49,7 @@ function Search() {
           data-testid="search-artist-input"
         />
         <button
+          className="btn-search"
           disabled={ search.length < 2 }
           onClick={ handleSearch }
           data-testid="search-artist-button"
@@ -55,17 +58,19 @@ function Search() {
         </button>
 
         {results.length > 0 && (
-          <div>
-            <p>
+          <div className="container-albums">
+            <p className="p-search">
               Resultado de álbuns de:
               {' '}
               {artistName}
             </p>
-            {results
-              .map((result) => (<PrevAlbum
-                key={ result.artistId }
-                albumInfo={ result }
-              />))}
+            <div className="container-prevAlbum">
+              {results
+                .map((result) => (<PrevAlbum
+                  key={ result.artistId }
+                  albumInfo={ result }
+                />))}
+            </div>
           </div>
         )}
         {showResultEmpty && <p>Nenhum álbum foi encontrado</p>}

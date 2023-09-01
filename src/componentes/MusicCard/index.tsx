@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SongType } from '../../types';
+import './musicCard.css';
 
 function MusicCard({ trackName, previewUrl, trackId }: SongType) {
   const [isChecked, setIsChecked] = useState(false);
@@ -10,9 +11,14 @@ function MusicCard({ trackName, previewUrl, trackId }: SongType) {
   };
 
   return (
-    <div data-testid="music-card">
+    <div data-testid="music-card" className="container-music">
       <h3>{trackName}</h3>
-      <audio data-testid="audio-component" src={ previewUrl } controls>
+      <audio
+        className="audio-component"
+        data-testid="audio-component"
+        src={ previewUrl }
+        controls
+      >
         <track kind="captions" />
         O seu navegador não suporta o elemento
         <code>audio</code>

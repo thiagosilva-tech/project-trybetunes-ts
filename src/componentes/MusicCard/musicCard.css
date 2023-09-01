@@ -1,0 +1,12 @@
+.container-music {
+  align-items: center;
+  border-top: 2px  gray;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.audio-component {
+  margin: 0 50px;
+}
+

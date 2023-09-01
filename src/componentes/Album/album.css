@@ -1,0 +1,20 @@
+.container-albumInfo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-album {
+  align-items: flex-start;
+  color: #001b15;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 100px;
+  padding: 20px;
+}
+
+.img-album {
+  max-width: 300px;
+  min-width: 300px;
+}
