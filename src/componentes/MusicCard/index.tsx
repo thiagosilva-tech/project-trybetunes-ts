@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { SongType } from '../../types';
 import './musicCard.css';
+import { addSong, removeSong } from '../../services/favoriteSongsAPI';
 
 function MusicCard({ trackName, previewUrl, trackId }: SongType) {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleChecked = () => {
-    setIsChecked(!isChecked);
-    console.log(trackId);
+  const handleChecked = async (event) => {
+    setIsChecked(event.target.checked);
+    const song = { trackId, trackName, previewUrl };
+    if (event.target.checked) {
+      await addSong(song);
+    } else {
+      await removeSong(song);
+    }
   };
 
   return (
@@ -29,10 +35,9 @@ function MusicCard({ trackName, previewUrl, trackId }: SongType) {
         data-testid={ `checkbox-music-${trackId}` }
       >
         <input
-          style={ { display: 'none' } }
+          style={ { opacity: 0 } }
           type="checkbox"
           id={ `checkbox-music-${trackId}` }
-          checked={ isChecked }
           onChange={ handleChecked }
         />
         <img
