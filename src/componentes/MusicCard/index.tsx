@@ -6,7 +6,7 @@ import { addSong, removeSong } from '../../services/favoriteSongsAPI';
 function MusicCard({ trackName, previewUrl, trackId }: SongType) {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleChecked = async (event) => {
+  const handleChecked = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
     const song = { trackId, trackName, previewUrl };
     if (event.target.checked) {
