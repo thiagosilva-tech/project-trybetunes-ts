@@ -67,7 +67,7 @@ function Search() {
             <div className="container-prevAlbum">
               {results
                 .map((result) => (<PrevAlbum
-                  key={ result.artistId }
+                  key={ result.collectionId }
                   albumInfo={ result }
                 />))}
             </div>

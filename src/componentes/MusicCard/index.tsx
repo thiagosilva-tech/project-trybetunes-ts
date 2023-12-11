@@ -3,8 +3,14 @@ import { SongType } from '../../types';
 import './musicCard.css';
 import { addSong, removeSong } from '../../services/favoriteSongsAPI';
 
-function MusicCard({ trackName, previewUrl, trackId }: SongType) {
-  const [isChecked, setIsChecked] = useState(false);
+type MusicCardProps = {
+  isFavorite: boolean,
+  music: SongType;
+};
+
+function MusicCard({ isFavorite, music }: MusicCardProps) {
+  const { trackId, trackName, previewUrl } = music;
+  const [isChecked, setIsChecked] = useState(isFavorite);
 
   const handleChecked = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);

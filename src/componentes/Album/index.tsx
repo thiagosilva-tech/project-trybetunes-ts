@@ -5,23 +5,31 @@ import Loading from '../Loading';
 import { AlbumType, SongType } from '../../types';
 import MusicCard from '../MusicCard';
 import './album.css';
+import { getFavoriteSongs } from '../../services/favoriteSongsAPI';
 
 function Album() {
   const { id = '' } = useParams();
   const [loading, setLoading] = useState(false);
   const [album, setAlbum] = useState<AlbumType>();
   const [listMusics, setListMusics] = useState<SongType[]>();
+  const [favoriteSongs, setFavoriteSongs] = useState<SongType[]>([]);
 
   useEffect(() => {
     async function fetchMusics() {
       setLoading(true);
       const [albumResponse, ...musicResponses] = await getMusics(id);
+      const favoriteTasks = await getFavoriteSongs();
+      setFavoriteSongs(favoriteTasks);
       setAlbum(albumResponse);
       setListMusics(musicResponses);
       setLoading(false);
     }
     fetchMusics();
   }, [id]);
+
+  function isFavorite(track: SongType) {
+    return favoriteSongs.some((song) => song.trackId === track.trackId);
+  }
 
   return (
     <div>
@@ -39,14 +47,11 @@ function Album() {
               <h3 data-testid="artist-name">{album.artistName}</h3>
             </div>
             <div>
-              {listMusics?.map((music) => (
-                <MusicCard
-                  key={ music.trackId }
-                  trackName={ music.trackName }
-                  previewUrl={ music.previewUrl }
-                  trackId={ music.trackId }
-                />
-              ))}
+              {listMusics?.map((music) => (<MusicCard
+                key={ music.trackId }
+                isFavorite={ isFavorite(music) }
+                music={ music }
+              />))}
             </div>
           </div>
         ))}
