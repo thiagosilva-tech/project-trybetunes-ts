@@ -1,6 +1,6 @@
 # Projeto Trybetunes
 
-Este projeto é uma aplicação web que permite aos usuários pesquisar artistas, visualizar álbuns e músicas, e marcar suas músicas favoritas. O objetivo é praticar a escrita de funções JavaScript, incluindo o uso de parâmetros, retorno de valores, e casos de teste.
+Este projeto é uma aplicação web que permite aos usuários pesquisar artistas, visualizar álbuns e músicas, e marcar suas músicas favoritas. O objetivo é praticar a escrita de funções TypeScript, incluindo o uso de parâmetros, retorno de valores, e casos de teste.
 
 ## Tecnologias Utilizadas
 
